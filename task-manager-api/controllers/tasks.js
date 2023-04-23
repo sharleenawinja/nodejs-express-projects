@@ -7,6 +7,7 @@ const getSingleTask = (req, res) => {
 };
 
 const createTask = (req, res) => {
+  //   res.json(req.body);
   res.send("create task");
 };
 
