@@ -9,8 +9,20 @@ const getAllTasks = async (req, res) => {
   }
 };
 
-const getSingleTask = (req, res) => {
-  res.send("get single task");
+const getSingleTask = async (req, res) => {
+  try {
+    const { id: taskId } = req.params; //getting the id and giving it an alias of taskId
+    const task = await Task.findOne({ _id: taskId });
+
+    if (!task) {
+      //make sure to write return statement otherwise javascript will continue executing the code and you might end up returning 2 responses
+      return res.status(404).json({ msg: `No task with id: ${taskId}` });
+    }
+
+    res.status(200).json({ task });
+  } catch (error) {
+    res.status(500).json({ msg: error });
+  }
 };
 
 const createTask = async (req, res) => {
