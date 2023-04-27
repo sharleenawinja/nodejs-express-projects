@@ -1,7 +1,12 @@
 const Task = require("../models/task");
 
-const getAllTasks = (req, res) => {
-  res.send("get all tasks");
+const getAllTasks = async (req, res) => {
+  try {
+    const tasks = await Task.find({}); //using the find static function and passing an empty object to get all the documents in the collection
+    res.status(200).json({ tasks }); //if property name is the same as the variable name for the value then you can omit the value name...but you could still use this other syntax {tasks: tasks}
+  } catch (error) {
+    res.status(500).json({ msg: error });
+  }
 };
 
 const getSingleTask = (req, res) => {
