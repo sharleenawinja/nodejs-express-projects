@@ -5,14 +5,14 @@ const connectDB = require("./db/connect");
 
 const app = express();
 
+// MIDDLEWARES
+
+// in order to serve static files use static middleware
+
 // using middleware built into express to get and send json data
 app.use(express.json()); // this helps us get data in the request body
 
 // routes
-app.get("/hello", (req, res) => {
-  res.send("Task Manager App");
-});
-
 app.use("/api/v1/tasks", tasks);
 
 const port = 5000;
